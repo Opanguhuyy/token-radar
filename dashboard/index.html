@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — which launch is worth farming next</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="hero">
+  <p class="kicker">Token Radar · model radar-2</p>
+  <h1>Which launch is worth farming next?</h1>
+  <p class="lede">Every protocol in the snapshot that has no token yet, ranked by what its
+  launch would be worth if the protocol stays as it is. Implied value is a
+  quarter of TVL, moved by the week's growth, by how long the protocol has
+  run with no token, and by how many chains it runs on. Each row carries the
+  steps to farm it.</p>
+  <dl class="facts" id="facts"></dl>
+</header>
+
+<main>
+  <section class="panel" id="spotlight">
+    <h2>Top 10 by implied value</h2>
+    <ol class="spots" id="spots"></ol>
+  </section>
+
+  <section class="panel">
+    <h2>Where the value sits</h2>
+    <div class="bars" id="bars"></div>
+  </section>
+
+  <section class="panel">
+    <div class="tabs" role="tablist">
+      <button id="tab-board" class="tab on" role="tab">Pre-token board</button>
+      <button id="tab-live" class="tab" role="tab">Already live (24)</button>
+    </div>
+    <div class="controls" id="controls">
+      <input id="q" type="search" placeholder="Search name or slug" aria-label="Search">
+      <select id="cat" aria-label="Category"><option value="">All categories</option></select>
+      <select id="chain" aria-label="Chain"><option value="">All chains</option></select>
+      <label class="check"><input id="wl" type="checkbox"> Watchlist only</label>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="tablewrap">
+      <table id="board">
+        <thead>
+          <tr>
+            <th data-sort="rank">Rank</th>
+            <th data-sort="name">Protocol</th>
+            <th data-sort="implied_value_usd">Implied value</th>
+            <th data-sort="tvl_usd">TVL</th>
+            <th data-sort="change_7d">7d</th>
+            <th data-sort="age_days">Age</th>
+            <th data-sort="chains">Chains</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <div class="pager">
+      <button id="prev">← Prev</button>
+      <span id="pageinfo"></span>
+      <button id="next">Next →</button>
+    </div>
+    <p class="note" id="tabnote"></p>
+  </section>
+
+  <section class="panel">
+    <h2>How the ranking works</h2>
+    <p>Implied value = TVL × 0.25 × growth × patience × reach.</p>
+    <ul class="method">
+      <li><b>Growth</b> — the protocol's 7-day TVL move, held inside −5% to +40%. A null move counts as flat.</li>
+      <li><b>Patience</b> — 0.70 plus up to 0.30 for time listed with no token, topping out at two years.</li>
+      <li><b>Reach</b> — 1 plus 0.04 per extra chain, up to four extras.</li>
+      <li><b>Board</b> — the whole 40-protocol watchlist, plus every pre-token protocol under the $50M floor that is not a centralised exchange and not a versioned release: 226 rows.</li>
+      <li><b>Live tab</b> — the 24 largest tokens by market cap, shown for contrast. They are not board rows: their token already trades.</li>
+      <li><b>Farm plans</b> — seven steps per row: verify, set up a fresh wallet, do the core action weekly for four weeks, join the community, keep records, and watch for a token announcement. Gas only; no step promises a token.</li>
+    </ul>
+    <p class="fine">Data: the sealed snapshot as of <span id="asof"></span>. The board is the entry's own claim, never a promise from the protocol or the house.</p>
+  </section>
+</main>
+
+<dialog id="detail">
+  <form method="dialog"><button class="close" aria-label="Close">✕</button></form>
+  <div id="detail-body"></div>
+</dialog>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
