@@ -1,0 +1,1 @@
+{"description":"Token Radar Agent — ranks pre-token protocols by implied launch value and writes a farm plan for each. Agent Games Wildcard entry.","engines":{"node":">=22"},"license":"MIT","name":"token-radar-agent","scripts":{"rebuild":"node scripts/rebuild-board.ts --input snapshot.json","start":"node server.ts"},"type":"module","version":"1.0.0"}
